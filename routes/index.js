@@ -44,6 +44,28 @@ router.post('/posts/:post/comments', function(req, res, next) {
   });
 });
 
+router.delete('/home',function(req, res) {
+        Post.remove({
+
+        }, function(err, data) {
+            if (err)
+                res.send(err);
+
+            res.json({ message: 'Successfully deleted' });
+        });
+    });
+
+router.delete('/home/:id',function(req, res) {
+        Post.remove({
+            _id: req.params.id
+        }, function(err, bear) {
+            if (err)
+                res.send(err);
+
+            res.json({ message: ' Successfully deleted' });
+        });
+    });
+
 router.get('/posts/:post', function(req, res, next) {
   req.post.populate('comments', function(err, post) {
     if (err) { return next(err); }
